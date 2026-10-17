@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"os"
 	"path"
+	"strings"
 	"testing"
 	"time"
 
@@ -91,6 +92,10 @@ func TestDaemon(t *testing.T) {
 				t.Fatalf("unable to unmarshal MQTT payload into %T: %v", dt, err)
 			}
 			t.Logf("msg: %v", dt)
+			// Home Assistant ignores a default_entity_id without a domain.
+			if !strings.HasPrefix(dt.DefaultEntityID, "device_tracker.") {
+				t.Fatalf("got default_entity_id %q; want device_tracker. prefix", dt.DefaultEntityID)
+			}
 		}
 	}
 
