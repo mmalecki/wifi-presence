@@ -17,6 +17,7 @@ start_service() {
         local debounce
         local hassAutodiscovery
         local hassPrefix
+        local hassZone
         local hostapdSocks
         local mqttAddr
         local mqttID
@@ -33,6 +34,7 @@ start_service() {
         config_get debounce main debounce
         config_get hassAutodiscovery main hassAutodiscovery
         config_get hassPrefix main hassPrefix
+        config_get hassZone main hassZone
         config_get hostapdSocks main hostapdSocks
         config_get mqttAddr main mqttAddr
         config_get mqttID main mqttID
@@ -52,6 +54,7 @@ start_service() {
         [ -n "${debounce}" ] && procd_append_param command "-debounce=${debounce}"
         [ -n "${hassAutodiscovery}" ] && procd_append_param command "-hass.autodiscovery=${hassAutodiscovery}"
         [ -n "${hassPrefix}" ] && procd_append_param command "-hass.prefix=${hassPrefix}"
+        [ -n "${hassZone}" ] && procd_append_param command "-hass.zone=${hassZone}"
         [ -n "${hostapdSocks}" ] && procd_append_param command "-hostapd.socks=${hostapdSocks}"
         [ -n "${mqttAddr}" ] && procd_append_param command "-mqtt.addr=${mqttAddr}"
         [ -n "${mqttID}" ] && procd_append_param command "-mqtt.id=${mqttID}"
